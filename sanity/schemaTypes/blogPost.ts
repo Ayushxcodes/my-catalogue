@@ -1,18 +1,48 @@
-import { defineType } from "sanity";
+import { defineType, defineField } from "sanity";
 
 export default defineType({
   name: "blogPost",
   title: "Blog Post",
   type: "document",
   fields: [
-    { name: "title", type: "string", title: "Title" },
-    { name: "slug", type: "slug", title: "Slug", options: { source: "title" } },
-    { name: "body", type: "array", title: "Body", of: [{ type: "block" }] },
-    {
+    defineField({
+      name: "title",
+      title: "Title",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: { source: "title" },
+    }),
+    defineField({
+      name: "excerpt",
+      title: "Excerpt",
+      type: "text",
+    }),
+    defineField({
       name: "mainImage",
-      type: "image",
       title: "Main Image",
+      type: "image",
       options: { hotspot: true },
-    },
+    }),
+    defineField({
+      name: "body",
+      title: "Body",
+      type: "array",
+      of: [{ type: "block" }, { type: "image" }],
+    }),
+    defineField({
+      name: "author",
+      title: "Author",
+      type: "string",
+    }),
+    defineField({
+      name: "readTime",
+      title: "Read Time",
+      type: "string",
+    }),
   ],
 });
