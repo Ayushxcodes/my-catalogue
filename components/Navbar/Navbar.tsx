@@ -6,11 +6,12 @@ import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { name: "Space", href: "/catalogue" },
-  { name: "Witness", href: "/about" },
+  { name: "Space", href: "/" },
+  { name: "Witness", href: "/witness" },
   { name: "Why I Draw", href: "/commission" },
   { name: "Blog", href: "/blog" },
   { name: "Participate", href: "/participate" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
