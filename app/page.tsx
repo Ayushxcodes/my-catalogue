@@ -85,93 +85,175 @@ export default function CataloguePage() {
   }, []);
 
   return (
-    <main className="flex flex-col items-center bg-gray-50">
-      {/* 1️⃣ Landing Section */}
-      <Landing />
+    <main className="relative flex flex-col items-center min-h-screen overflow-x-hidden">
+      {/* 🌌 Fixed blurred background image (site-wide) */}
+      <div
+        className="absolute inset-0 -z-20 bg-cover bg-center bg-fixed bg-no-repeat"
+        style={{
+          backgroundImage: "url('/potrait.avif')",
+        }}
+      />
 
-      {/* 2️⃣ Private Space for Public Nudity */}
-      <section className="w-full bg-white py-20 px-6">
-        <div className="max-w-4xl mx-auto space-y-6 text-justify leading-relaxed text-base md:text-lg">
-          <motion.h2
-            className="text-3xl md:text-4xl font-semibold text-center text-black mb-10 tracking-wide"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            PRIVATE SPACE FOR PUBLIC NUDITY
-          </motion.h2>
+      {/* Global blur + dark overlay (one place only) */}
+      <div className="absolute inset-0 -z-10 backdrop-blur-md bg-black/40" />
 
-          {[
-            "Nudity is not the end of the exercise but the beginning. It’s a ticket to enter this space that I call ‘private space for public nudity’.",
-            "In this space, I represent society, or the rest of the world, therefore dressed. In this space, we interact as energies, engagement is sought, sketch is capturing this engagement in bold lines. Trust is the basis of engagement and nudity is not, therefore, a state of being, but a dynamic process of unlearning.",
-            "Anonymity and privacy guaranteed, for it doesn’t matter who my subjects are, their attributes, but the energy they bring to the engagement. Therefore, I don’t draw what I see, but what I feel.",
-            "Paradoxical it is, I ask my subjects to experience solitude in my company, in this space, for we are different, closer to our inherent self, when we are not performing, securely secluded in a room, and naked. Society and seclusion are sought at the same time in this private space for public nudity.",
-            "Also to witness in the way they have constructed themselves, entwined with complex identities, many manifestations of ego, for social consumption. So, here, in this space, they don’t represent themselves, they just exist.",
-            "Trust in self, and me help my subject reconcile this paradoxical situation. This experiment has no fixed agenda, time frame, and is open to possibilities.",
-          ].map((text, i) => (
-            <motion.p
-              key={i}
-              variants={paragraphVariants}
-              initial="hidden"
-              whileInView="visible"
+      {/* Content: everything rendered above the single overlay */}
+      <div className="relative z-10 w-full">
+        {/* 1️⃣ Landing Section */}
+        <Landing />
+
+        {/* 🌀 PRIVATE SPACE FOR PUBLIC NUDITY */}
+        <section className="relative w-full py-20 px-6 overflow-hidden">
+          {/* 🌌 Background image (same across all sections) */}
+          <div
+            className="absolute inset-0 -z-10 bg-cover bg-center bg-fixed bg-no-repeat blur-md brightness-50"
+            style={{
+              backgroundImage: "url('/bg-art.jpg')",
+            }}
+          />
+          {/* 🌫️ Dark overlay for readability */}
+          <div className="absolute inset-0 bg-black/40 -z-[5]" />
+
+          {/* 📦 Content */}
+          <div className="relative z-10 max-w-4xl mx-auto space-y-6 text-justify leading-relaxed text-base md:text-lg">
+            <motion.h2
+              className="text-3xl md:text-4xl font-semibold text-center text-white mb-10 tracking-wide"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2, ease: "easeOut" }}
-              className="text-black"
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              {text}
-            </motion.p>
-          ))}
-        </div>
-      </section>
+              PRIVATE SPACE FOR PUBLIC NUDITY
+            </motion.h2>
 
-      {/* 3️⃣ Hero Section */}
-      <Hero />
+            {[
+              "Nudity is not the end of the exercise but the beginning. It’s a ticket to enter this space that I call ‘private space for public nudity’.",
+              "In this space, I represent society, or the rest of the world, therefore dressed. In this space, we interact as energies, engagement is sought, sketch is capturing this engagement in bold lines. Trust is the basis of engagement and nudity is not, therefore, a state of being, but a dynamic process of unlearning.",
+              "Anonymity and privacy guaranteed, for it doesn’t matter who my subjects are, their attributes, but the energy they bring to the engagement. Therefore, I don’t draw what I see, but what I feel.",
+              "Paradoxical it is, I ask my subjects to experience solitude in my company, in this space, for we are different, closer to our inherent self, when we are not performing, securely secluded in a room, and naked. Society and seclusion are sought at the same time in this private space for public nudity.",
+              "Also to witness in the way they have constructed themselves, entwined with complex identities, many manifestations of ego, for social consumption. So, here, in this space, they don’t represent themselves, they just exist.",
+              "Trust in self, and me help my subject reconcile this paradoxical situation. This experiment has no fixed agenda, time frame, and is open to possibilities.",
+            ].map((text, i) => (
+              <motion.p
+                key={i}
+                variants={paragraphVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.2, ease: "easeOut" }}
+                className="text-gray-200"
+              >
+                {text}
+              </motion.p>
+            ))}
+          </div>
+        </section>
 
-      {/* 4️⃣ Live Drawing Section */}
-      <section className="w-full max-w-7xl p-10">
-        <h1 className="text-3xl font-bold mb-6 text-center text-black tracking-tight">
-          LIVE DRAWING
-        </h1>
+        {/* 3️⃣ Hero Section */}
+        <Hero />
 
-        <div className="max-w-3xl mx-auto mb-10">
-          <p className="italic text-gray-700 text-base md:text-lg leading-relaxed text-center md:text-left">
-            “Naked people speak their mind without inhibitions while inspiring
-            my drawings. There comes a time, when my subjects are not conscious
-            of their nudity like they are not conscious of their clothing
-            (clothes and food make their presence felt in their absence). Nudity
-            is the process that sets in an interesting psychology. My subjects
-            feel I know everything about them because I have seen them naked,
-            therefore, don’t feel the need to hide anything. They speak about
-            things in this space that they wouldn’t otherwise.”
-          </p>
-        </div>
+        {/* 4️⃣ Live Drawing Section */}
+        {/* 4️⃣ Live Drawing Section */}
+        <section className="relative w-full py-20 px-6 overflow-hidden">
+          {/* 🌌 Background image (matches global aesthetic) */}
+          <div
+            className="absolute inset-0 -z-10 bg-cover bg-center bg-fixed bg-no-repeat blur-md brightness-50"
+            style={{
+              backgroundImage: "url('/bg-art.jpg')", // 🔄 use your same site-wide image
+            }}
+          />
 
-        {/* Image Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
-          {items.map((item) => (
-            <div
-              key={item._id}
-              className="relative cursor-pointer rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
-              onClick={() => setSelectedItem(item)}
-            >
-              {item.image && (
-                <div className="w-full aspect-square relative">
-                  <Image
-                    src={urlFor(item.image).width(800).height(800).url()}
-                    alt={item.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </div>
-              )}
+          {/* 🌫️ Foreground overlay for readability */}
+          <div className="absolute inset-0 bg-black/40 -z-[5]" />
+
+          {/* 📦 Content */}
+          <div className="relative z-10 max-w-7xl mx-auto w-full">
+            <h1 className="text-3xl font-bold mb-6 text-center text-white tracking-tight">
+              LIVE DRAWING
+            </h1>
+
+            <div className="max-w-3xl mx-auto mb-10">
+              <p className="italic text-gray-200 text-base md:text-lg leading-relaxed text-center md:text-left">
+                “Naked people speak their mind without inhibitions while
+                inspiring my drawings. There comes a time when my subjects are
+                not conscious of their nudity like they are not conscious of
+                their clothing (clothes and food make their presence felt in
+                their absence). Nudity is the process that sets in an
+                interesting psychology. My subjects feel I know everything about
+                them because I have seen them naked, therefore, don’t feel the
+                need to hide anything. They speak about things in this space
+                that they wouldn’t otherwise.”
+              </p>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* 5️⃣ Live Drawing Modal */}
+            {/* 🖼️ Image Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
+              {items.map((item) => (
+                <div
+                  key={item._id}
+                  className="relative cursor-pointer rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+                  onClick={() => setSelectedItem(item)}
+                >
+                  {item.image && (
+                    <div className="w-full aspect-square relative">
+                      <Image
+                        src={urlFor(item.image).width(800).height(800).url()}
+                        alt={item.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 6️⃣ Rainbow Existence Section */}
+        <section className="w-full py-20 px-6">
+          <div className="max-w-7xl mx-auto w-full">
+            <h1 className="text-3xl font-bold mb-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-orange-400">
+              RAINBOW EXISTENCE
+            </h1>
+
+            <div className="max-w-3xl mx-auto mb-10">
+              <p className="italic text-gray-200 text-base md:text-lg leading-relaxed text-center md:text-left">
+                “If sketches are what I feel in the moments of engagement...”
+              </p>
+            </div>
+
+            {/* Image Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
+              {rainbowItems.map((painting) => (
+                <div
+                  key={painting._id}
+                  className="relative cursor-pointer rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+                  onClick={() => setSelectedRainbow(painting)}
+                >
+                  {painting.image && (
+                    <div className="w-full aspect-square relative">
+                      <Image
+                        src={urlFor(painting.image)
+                          .width(800)
+                          .height(800)
+                          .url()}
+                        alt={painting.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {/* 🧩 5️⃣ & 7️⃣ Modals (moved outside to fix positioning issue) */}
       <Modal
         item={selectedItem}
         onClose={() => setSelectedItem(null)}
@@ -179,48 +261,6 @@ export default function CataloguePage() {
         descField="description"
       />
 
-      {/* 6️⃣ Rainbow Existence Section (Same UI as Live Drawing) */}
-      <section className="w-full max-w-7xl p-10">
-        <h1 className="text-3xl font-bold mb-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-orange-500">
-          RAINBOW EXISTENCE
-        </h1>
-
-        <div className="max-w-3xl mx-auto mb-10">
-          <p className="italic text-gray-700 text-base md:text-lg leading-relaxed text-center md:text-left">
-            “If sketches are what I feel in the moments of engagement, paintings
-            are an outcome of what happens to you because of these engagements.
-            Something shifts in me, insightful in a different way, sometimes
-            overwhelmed, for a strong engagement is akin to love. To vent out
-            pent up emotions I paint for hours, restlessly, briskly, with high
-            libido, playing with colours.”
-          </p>
-        </div>
-
-        {/* Same grid layout as Live Drawing */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
-          {rainbowItems.map((painting) => (
-            <div
-              key={painting._id}
-              className="relative cursor-pointer rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
-              onClick={() => setSelectedRainbow(painting)}
-            >
-              {painting.image && (
-                <div className="w-full aspect-square relative">
-                  <Image
-                    src={urlFor(painting.image).width(800).height(800).url()}
-                    alt={painting.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 7️⃣ Rainbow Modal (Same as Live Drawing Modal) */}
       <Modal
         item={selectedRainbow}
         onClose={() => setSelectedRainbow(null)}
@@ -255,7 +295,7 @@ function Modal({
       show={!!item}
       appear
       as="div"
-      className="fixed inset-0 flex justify-center items-center z-50"
+      className="fixed inset-0 flex justify-center items-center z-[999]"
     >
       <Transition.Child
         as="div"
@@ -265,7 +305,7 @@ function Modal({
         leave="transition-opacity duration-200"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
-        className="absolute inset-0 backdrop-blur-md bg-black/30"
+        className="absolute inset-0 backdrop-blur-md bg-black/40"
         onClick={onClose}
       />
       <Transition.Child

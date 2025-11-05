@@ -51,22 +51,32 @@ const Hero = () => {
   const slide = slides[current];
 
   return (
-    <section className="flex flex-col items-center justify-center w-full min-h-[80vh] bg-gray-50 overflow-hidden px-4 py-10">
+    <section className="relative flex flex-col items-center justify-center w-full min-h-[80vh] overflow-hidden px-4 py-10">
+      {/* 🌌 Background image (matches the global style) */}
+      <div
+        className="absolute inset-0 -z-10 bg-cover bg-center bg-fixed bg-no-repeat blur-md brightness-50"
+        style={{
+          backgroundImage: "url('/bg-art.jpg')", // 🖼️ Same image used site-wide
+        }}
+      />
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-black/40 -z-[5]" />
+
       {/* Centered Heading */}
-      <div className="text-center mb-10">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
+      <div className="text-center mb-10 relative z-10">
+        <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
           Live Images
         </h1>
-        <p className="text-sm md:text-base text-gray-600 mt-3 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-sm md:text-base text-gray-200 mt-3 max-w-2xl mx-auto leading-relaxed">
           NUDITY IS REVEALING. PEOPLE SPEAK THEIR MIND WITHOUT INHIBITIONS WHEN
           THEY INSPIRE MY DRAWINGS WITH THEIR BARE COUNTENANCE.
         </p>
       </div>
 
       {/* Content Section */}
-      <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-7xl">
+      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between w-full max-w-7xl bg-black/40 backdrop-blur-sm rounded-3xl p-6 md:p-10">
         {/* LEFT TEXT */}
-        <div className="md:w-1/2 w-full p-6 md:p-10 flex flex-col items-center md:items-start text-center md:text-left">
+        <div className="md:w-1/2 w-full flex flex-col items-center md:items-start text-center md:text-left">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={slide._id}
@@ -75,15 +85,15 @@ const Hero = () => {
               exit={{ x: "-100%", opacity: 0 }}
               transition={{ duration: 1, ease: [0.42, 0, 0.58, 1] }}
             >
-              <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-5 leading-tight">
+              <h2 className="text-2xl md:text-3xl font-semibold text-white mb-5 leading-tight">
                 {slide.title}
               </h2>
-              <div className="text-base md:text-lg text-gray-700 mb-6 max-w-md leading-relaxed space-y-4">
+              <div className="text-base md:text-lg text-gray-200 mb-6 max-w-md leading-relaxed space-y-4">
                 {slide.paragraphs?.map((p, i) => (
                   <p key={i}>{p}</p>
                 ))}
               </div>
-              <button className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition">
+              <button className="px-6 py-3 bg-white text-black font-medium rounded-lg hover:bg-gray-200 transition">
                 Explore Catalogue
               </button>
             </motion.div>
@@ -91,7 +101,7 @@ const Hero = () => {
         </div>
 
         {/* RIGHT IMAGE */}
-        <div className="relative md:w-1/2 w-full h-[250px] md:h-[70vh] flex items-center justify-center bg-white overflow-hidden">
+        <div className="relative md:w-1/2 w-full h-[250px] md:h-[70vh] flex items-center justify-center overflow-hidden rounded-2xl shadow-xl mt-8 md:mt-0">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={slide.image?.asset?._ref}
@@ -103,7 +113,7 @@ const Hero = () => {
             >
               {slide.image && (
                 <Image
-                  src={urlFor(slide.image).width(800).url()}
+                  src={urlFor(slide.image).width(1000).url()}
                   alt={slide.title}
                   fill
                   className="object-contain"
